@@ -1,0 +1,41 @@
+<html>
+<head>
+<script src='js/js.js'></script>
+<script src='js/InteractiveGraphicEntity.js'></script>
+<script src='js/Card.js'></script>
+<script src='js/CanvasHandler.js'></script>
+<script type="text/javascript" src="./libraries/sl4b/index.js" configurationfile="./libraries/sl4b/configuration/common-attributes.js"></script>
+</head>
+<body>
+<div style="float:right" id='log'></div>
+    <canvas id="myCanvas" width="800" height="600">
+        Fallback content, in case the browser does not support Canvas.
+    </canvas>
+   <script>
+	var g_oChatObj = null;
+        var elem = document.getElementById('myCanvas');
+        if (elem && elem.getContext) 
+        {
+            var context = elem.getContext('2d');
+            if (context) 
+            {
+                canvasHandler = new CanvasHandler(context, elem.offsetLeft,elem.offsetTop, 800, 600);
+                canvasHandler.addSquare(1,0,0,100,100,'#000');
+                canvasHandler.addSquare(2,50,50,100,100,'#f00');
+                canvasHandler.repaint();
+            }
+            elem.addEventListener("mousedown",function(event) {canvasHandler.canvasMouseDown(event);},false);
+            elem.addEventListener("mousemove",function(event) {canvasHandler.canvasMouseMove(event);},false);
+            elem.addEventListener("mouseup",function(event) {canvasHandler.canvasMouseUp(event);},false);
+            elem.addEventListener("dblclick",function(event) {canvasHandler.canvasDoubleClick(event);},false);
+            var surface = new Image();
+            surface.src = "img/Surface.jpg";
+            surface.onload = function() {
+                canvasHandler.setSurface(surface);
+            };
+        }
+</script>
+<script src='js/CommunicationHandler.js'></script>
+
+</body>
+</html>

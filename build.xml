@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project default="build" basedir="." xmlns:jsl="antlib:com.googlecode.jslint4java">
+
+	<target name="run-jetty">
+		<exec dir="." executable="java" logError="true" output="output.txt">
+			<arg line="-jar &quot;${basedir}/build/lib/httpd.jar&quot; WebContent 7070" />
+		</exec>
+	</target>
+	
+	<target name="build" />
+
+</project>
