@@ -1,3 +1,5 @@
+goog.provide('CommunicationHandler');
+
 var canvasHandler;
 var CHAT_DIR = "/Examples/Contribution";
 

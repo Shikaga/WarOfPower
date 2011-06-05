@@ -1,3 +1,5 @@
+goog.provide('CanvasHandler');
+
 var context;
 var offsetLeft,offsetTop;
 var width;

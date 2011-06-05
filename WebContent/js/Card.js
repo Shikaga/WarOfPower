@@ -1,3 +1,5 @@
+goog.provide('Card');
+
 var isFaceUp;
 var isTapped;
 var front, back;

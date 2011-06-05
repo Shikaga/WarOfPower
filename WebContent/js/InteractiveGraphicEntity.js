@@ -1,3 +1,5 @@
+goog.provide('InteractiveGraphicEntity');
+
 var uniqueIdentifier;
 var x,y;
 var width,height;
