@@ -1,4 +1,4 @@
-goog.provide('CanvasHandler');
+goog.require('InteractiveGraphicEntity');
 
 var context;
 var offsetLeft,offsetTop;

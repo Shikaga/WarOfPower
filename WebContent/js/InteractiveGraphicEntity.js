@@ -1,5 +1,3 @@
-goog.provide('InteractiveGraphicEntity');
-
 var uniqueIdentifier;
 var x,y;
 var width,height;
@@ -7,18 +5,38 @@ var color;
 var front, back;
 var isRotated;
 var image;
-var subGraphics
+var subGraphics;
 
-function paintAllGraphics(context)
+function InteractiveGraphicEntity(uniqueIdentifier,x,y,width,height,color)
+{
+	this.uniqueIdentifier = uniqueIdentifier;
+	this.x = x;
+	this.y = y;
+	this.isRotated = false;
+	this.width = width;
+	this.height = height;
+	this.color = color;
+	
+	this.isClicked = isClicked;
+	this.moveX = moveX;
+	this.moveY = moveY;
+	this.setX = setX;
+	this.setY = setY;      
+	this.setRotated = setRotated;
+	this.setImage = setImage;
+	this.subGraphics = [];
+}
+
+InteractiveGraphicEntity.prototype.paintAllGraphics = function(context)
 {
     context.drawImage(this.image,0,0,this.width,this.height);
     for (var i=0; i < this.subGraphics.length; i++)
     {
         this.subGraphics[i].paint(context);   
     }
-}
+};
 
-function superPaint(context)
+InteractiveGraphicEntity.prototype.superPaint = function(context)
 {
     if (this.image !== undefined) {
         context.translate(this.x, this.y);
@@ -36,12 +54,13 @@ function superPaint(context)
         context.fillStyle = this.color;
         context.fillRect(this.x,this.y,this.width,this.height);
     }    
-}
+};
 
-function paint(context)
+InteractiveGraphicEntity.prototype.paint = function(context)
 {
-    superPaint(context);
-}
+	log('s');
+    this.superPaint(context);
+};
 
 function isClicked(x,y)
 {
@@ -93,33 +112,9 @@ function setImage(image)
     this.image = image;   
 }
 
-function addSubGraphic(graphic)
+InteractiveGraphicEntity.prototype.addSubGraphic = function(graphic)
 {
     this.subGraphics.push(graphic);
-}
+};
 
-function InteractiveGraphicEntity(uniqueIdentifier,x,y,width,height,color)
-{
-    this.uniqueIdentifier = uniqueIdentifier;
-    this.x = x;
-    this.y = y;
-    this.isRotated = false;
-    this.width = width;
-    this.height = height;
-    this.color = color;
-    
-    this.superPaint = superPaint; 
-    this.paint = paint;  
-    this.paintAllGraphics = paintAllGraphics;
-    
-    this.isClicked = isClicked;
-    this.moveX = moveX;
-    this.moveY = moveY;
-    this.setX = setX;
-    this.setY = setY;      
-    this.setRotated = setRotated;
-    this.setImage = setImage;
-    this.addSubGraphic = addSubGraphic;
-    this.subGraphics = [];
-}
   
