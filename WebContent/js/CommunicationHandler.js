@@ -70,15 +70,16 @@ ContribSubscriber.prototype.recordMultiUpdated = function(sObjectName, oFieldDat
     //log(getKeys(sObjectName));
     var oMsg = { Usr:"", Msg: "" };
     var iFieldDataSize = oFieldData.size();
-    for (var i = 0; i < iFieldDataSize; i = i + 1) {
+    var i;
+    for (i = 0; i < iFieldDataSize; i = i + 1) {
 	oMsg[oFieldData.getFieldName(i)] = oFieldData.getFieldValue(i);
     }
     var sMsgText = oMsg.Msg;
-    var arguments = sMsgText.split(" ");
-    if (arguments.length == 3) {
-	canvasHandler.setNewGraphicPosition(arguments[0],arguments[1],arguments[2]);
-    } else if (arguments.length == 2) {
-	canvasHandler.setNewGraphicRotation(arguments[0],arguments[1]);
+    var options = sMsgText.split(" ");
+    if (options.length === 3) {
+	canvasHandler.setNewGraphicPosition(options[0],options[1],options[2]);
+    } else if (options.length === 2) {
+	canvasHandler.setNewGraphicRotation(options[0],options[1]);
     }
 };
 function initCommunicationHandler() {
@@ -92,7 +93,9 @@ function updatePosition(index,x,y) {
 function updateTap(index, isTapped)
 {
     var tapped = 0;
-    if (isTapped) tapped = 1;
+    if (isTapped) {
+        tapped = 1;
+    }
     g_oChatObj.sendMessage(index+' '+tapped);
 }
 

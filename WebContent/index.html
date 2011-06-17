@@ -12,6 +12,7 @@
 
 </head>
 <body>
+lolol
 <div style="float:right" id='log'></div>
     <canvas id="myCanvas" width="800" height="600">
         Fallback content, in case the browser does not support Canvas.
@@ -25,8 +26,9 @@
             if (context) 
             {
                 canvasHandler = new CanvasHandler(context, elem.offsetLeft,elem.offsetTop, 800, 600);
-                canvasHandler.addSquare(1,0,0,100,100,'#000');
-                canvasHandler.addSquare(2,50,50,100,100,'#f00');
+                canvasHandler.addSquare(1,0,0);
+                canvasHandler.addSquare(2,50,50);
+                canvasHandler.addLibrary(3,100,100);
                 canvasHandler.repaint();
             }
             elem.addEventListener("mousedown",function(event) {canvasHandler.canvasMouseDown(event);},false);
@@ -41,6 +43,8 @@
         }
 </script>
 <script src='js/CommunicationHandler.js'></script>
-
+<p>lol
+sdfsd</p>
+<button>Lol</button>
 </body>
 </html>

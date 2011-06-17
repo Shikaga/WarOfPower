@@ -1,7 +1,8 @@
 function log() 
 {
     var string = "";
-    for (var i=0; i < arguments.length; i++)
+    var i;
+    for (i=0; i < arguments.length; i++)
     {
         string += arguments[i] + " ";
     }
@@ -12,8 +13,12 @@ function log()
 
 function getKeys(obj){
     var keys = [];
-    for(var key in obj){
-        keys.push(key);
+    var key;
+        for(key in obj){
+           if (obj.hasOwnProperty(key)) {
+               keys.push(key);
+           }
     }
+    
    return keys;
-};
+}

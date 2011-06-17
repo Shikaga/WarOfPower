@@ -16,53 +16,46 @@ function InteractiveGraphicEntity(uniqueIdentifier,x,y,width,height,color)
 	this.width = width;
 	this.height = height;
 	this.color = color;
-	
-	this.isClicked = isClicked;
-	this.moveX = moveX;
-	this.moveY = moveY;
-	this.setX = setX;
-	this.setY = setY;      
-	this.setRotated = setRotated;
-	this.setImage = setImage;
+	   
 	this.subGraphics = [];
 }
 
 InteractiveGraphicEntity.prototype.paintAllGraphics = function(context)
 {
-    context.drawImage(this.image,0,0,this.width,this.height);
-    for (var i=0; i < this.subGraphics.length; i++)
-    {
-        this.subGraphics[i].paint(context);   
-    }
+	if (this.image !== undefined) {
+		context.drawImage(this.image,0,0,this.width,this.height);
+	} else {
+		context.fillStyle = this.color;
+		context.fillRect(0,0,this.width,this.height);
+	}    
+	var i;
+	for (i=0; i < this.subGraphics.length; i++)
+	{
+		this.subGraphics[i].paint(context);   
+	}
 };
 
 InteractiveGraphicEntity.prototype.superPaint = function(context)
 {
-    if (this.image !== undefined) {
-        context.translate(this.x, this.y);
-        if (this.isRotated) {
-            context.translate(this.height,0);
-            context.rotate(90 * Math.PI / 180);
-            this.paintAllGraphics(context);
-            context.rotate(-90 * Math.PI / 180);
-            context.translate(-this.height,0);
-        } else {
-            this.paintAllGraphics(context);
-        }
-        context.translate(-this.x,-this.y);
+    context.translate(this.x, this.y);
+    if (this.isRotated) {
+        context.translate(this.height,0);
+        context.rotate(90 * Math.PI / 180);
+        this.paintAllGraphics(context);
+        context.rotate(-90 * Math.PI / 180);
+        context.translate(-this.height,0);
     } else {
-        context.fillStyle = this.color;
-        context.fillRect(this.x,this.y,this.width,this.height);
-    }    
+        this.paintAllGraphics(context);
+    }
+    context.translate(-this.x,-this.y);
 };
 
 InteractiveGraphicEntity.prototype.paint = function(context)
 {
-	log('s');
-    this.superPaint(context);
+	this.superPaint(context);
 };
 
-function isClicked(x,y)
+InteractiveGraphicEntity.prototype.isClicked = function(x,y)
 {
     if (!this.isRotated) 
     {
@@ -80,37 +73,37 @@ function isClicked(x,y)
         }
         return false;
     }
-}
+};
 
-function moveX(x)
+InteractiveGraphicEntity.prototype.moveX = function(x)
 {
     this.x += x;
-}
+};
 
-function moveY(y)
+InteractiveGraphicEntity.prototype.moveY = function(y)
 {
     this.y += y;
-}
+};
 
-function setX(x)
+InteractiveGraphicEntity.prototype.setX = function(x)
 {
-    this.x = parseInt(x);
-}
+    this.x = parseInt(x,10);
+};
 
-function setY(y)
+InteractiveGraphicEntity.prototype.setY = function(y)
 {
-    this.y = parseInt(y);
-}
+    this.y = parseInt(y,10);
+};
 
-function setRotated(rotated)
+InteractiveGraphicEntity.prototype.setRotated = function(rotated)
 {
     this.isRotated = rotated;   
-}
+};
 
-function setImage(image)
+InteractiveGraphicEntity.prototype.setImage = function(image)
 {
     this.image = image;   
-}
+};
 
 InteractiveGraphicEntity.prototype.addSubGraphic = function(graphic)
 {
